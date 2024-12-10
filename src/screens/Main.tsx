@@ -4,12 +4,13 @@ import { container } from '@/styles/global';
 import { returnDateArr } from '@/composables/date';
 import { weekly } from '@/constants/calendar';
 import { IDateData } from '@/types/date';
+import Nav from '@comp/Nav';
 
 const Main: React.FC = () => {
   const today = new Date();
   const nowYear = today.getFullYear();
   const nowMonth = today.getMonth();
-  const nowDate = today.getDate();
+  const nowDate = Number(today.getDate().toString().padStart(2, '0'));
   const nowDay = today.getDay();
 
   const [dateArr, setDateArr] = useState<IDateData[][] | null>(null);
@@ -33,9 +34,9 @@ const Main: React.FC = () => {
   }, [month, year, dateArr]);
 
   return (
-    <View style={container.default}>
-      <Text>2024년 12월 01일</Text>
-      <View></View>
+    <View style={[container.default, styles.mainContainer]}>
+      <Text style={styles.dateTxt}>{`${year}년 ${month}월 ${date}일`}</Text>
+      <View style={styles.line}></View>
       <View>
         {weekly.map(w => (
           <Text key={w}>{w}</Text>
@@ -53,12 +54,25 @@ const Main: React.FC = () => {
             );
           })}
       </View>
+      <Nav />
     </View>
   );
 };
 
 export default Main;
 
-// const styles = StyleSheet.create({
-
-// });
+const styles = StyleSheet.create({
+  mainContainer: {
+    paddingHorizontal: 15,
+  },
+  dateTxt: {
+    fontSize: 22,
+    fontWeight: 600,
+    paddingLeft: 3,
+  },
+  line: {
+    height: 2,
+    backgroundColor: '#f3f3f3',
+    marginTop: 17,
+  },
+});
