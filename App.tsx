@@ -12,6 +12,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '@/screens/Main';
 import LoadingScreen from '@/screens/Loading';
 import SettingScreen from '@/screens/Setting';
+import Nav from '@comp/Nav';
 
 import { isDarkMode } from '@/composables/color';
 import { container } from '@/styles/global';
@@ -36,6 +37,7 @@ function App(): React.JSX.Element {
             <Stack.Screen name="Setting" component={SettingScreen} />
           </Stack.Navigator>
         </NavigationContainer>
+        <Nav />
       </SafeAreaView>
     </>
   );

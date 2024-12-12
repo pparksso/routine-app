@@ -5,7 +5,6 @@ import { returnDateArr } from '@/composables/date';
 import { weekly } from '@/constants/calendar';
 import { IDateData } from '@/types/date';
 import RateGradient from '@comp/RateGradient';
-import Nav from '@comp/Nav';
 
 const Main: React.FC = () => {
   const today = new Date();
@@ -80,7 +79,6 @@ const Main: React.FC = () => {
             })}
         </View>
       </View>
-      <Nav />
     </View>
   );
 };
@@ -90,6 +88,7 @@ export default Main;
 const styles = StyleSheet.create({
   mainContainer: {
     paddingHorizontal: 15,
+    paddingTop: 20,
   },
   todayTxt: {
     fontSize: 22,
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
   line: {
     height: 2,
     backgroundColor: '#f3f3f3',
-    marginTop: 17,
+    marginTop: 5,
   },
   calendarContainer: {
     paddingHorizontal: 25,
@@ -108,7 +107,7 @@ const styles = StyleSheet.create({
   weeklyBox: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 13,
+    marginBottom: 25,
   },
   weeklyTxt: {
     fontSize: 14,
@@ -117,6 +116,7 @@ const styles = StyleSheet.create({
   weekBox: {
     flexDirection: 'row',
     alignContent: 'space-around',
+    marginBottom: 25,
   },
   dateBox: {
     flex: 1,
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   dateTxt: {
-    marginBottom: 15,
+    marginBottom: 5,
   },
   rateBox: {
     width: 30,
