@@ -30,19 +30,6 @@ export const makeCalendar = (year: number, month: number) => {
   AsyncStorage.setItem(`${year}-${month}`, JSON.stringify(thisMonthObj));
 };
 
-export const makeRateVal = (rate: number) => {
-  const angle = rate * 3.6;
-  if (rate) {
-    return {
-      background: `conic-gradient(#000000 0deg ${angle}deg, #d9d9d9 ${angle}deg 360deg)`,
-    };
-  } else {
-    return {
-      background: '#d9d9d9',
-    };
-  }
-};
-
 export const returnDateArr = async (
   year: number,
   month: number,
