@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { container } from '@/styles/global';
 import { returnDateArr } from '@/composables/date';
 import { weekly } from '@/constants/calendar';
 import { IDateData } from '@/types/date';
 import RateGradient from '@comp/RateGradient';
+import MonthPicker from '@comp/MonthPicker';
 
 const Main: React.FC = () => {
   const today = new Date();
@@ -13,11 +14,19 @@ const Main: React.FC = () => {
   const nowDate = Number(today.getDate().toString().padStart(2, '0'));
   const nowDay = today.getDay();
 
+  const [visible, setVisible] = useState(false);
+
   const [dateArr, setDateArr] = useState<IDateData[][] | null>(null);
   const [year, setYear] = useState<number>(nowYear);
   const [month, setMonth] = useState<number>(nowMonth + 1);
   const [date, setDate] = useState<number>(nowDate);
   const [day, setDay] = useState<string>(weekly[(nowDay + 6) % 7]);
+
+  const handleMonthChange = (selectedYear: number, selectedMonth: number) => {
+    setYear(selectedYear);
+    setMonth(selectedMonth);
+    setVisible(false); // MonthPicker 닫기
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,8 +45,16 @@ const Main: React.FC = () => {
 
   return (
     <View style={[container.default, styles.mainContainer]}>
-      <Text style={styles.todayTxt}>{`${year}년 ${month}월 ${date}일`}</Text>
+      <Pressable onPress={() => setVisible(true)}>
+        <Text style={styles.todayTxt}>{`${year}년 ${month}월`}</Text>
+      </Pressable>
       <View style={styles.line}></View>
+      <MonthPicker
+        visible={visible}
+        selectedYear={year}
+        selectedMonth={month}
+        onClose={handleMonthChange}
+      />
       <View style={styles.calendarContainer}>
         <View style={styles.weeklyBox}>
           {weekly.map(w => (
